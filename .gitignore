@@ -2,3 +2,6 @@ build/
 pico-sdk/
 .DS_Store
 .vscode/**
+CMakeCache.txt
+CMakeFiles/
+**/build_raylib/raylib/
