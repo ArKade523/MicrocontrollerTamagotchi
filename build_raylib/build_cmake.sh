@@ -1,0 +1,1 @@
+cmake .. -DBUILD_RAYLIB=ON

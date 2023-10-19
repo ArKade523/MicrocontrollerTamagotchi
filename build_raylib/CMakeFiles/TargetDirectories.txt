@@ -1,0 +1,5 @@
+/Users/kadeangell/Documents/Tamagotchi/build_raylib/CMakeFiles/edit_cache.dir
+/Users/kadeangell/Documents/Tamagotchi/build_raylib/CMakeFiles/rebuild_cache.dir
+/Users/kadeangell/Documents/Tamagotchi/build_raylib/raylib/CMakeFiles/pico_tamagotchi.dir
+/Users/kadeangell/Documents/Tamagotchi/build_raylib/raylib/CMakeFiles/edit_cache.dir
+/Users/kadeangell/Documents/Tamagotchi/build_raylib/raylib/CMakeFiles/rebuild_cache.dir
