@@ -20,6 +20,12 @@ void Tamagotchi::update() {
         happiness -= 1;
 
     }
+
+    if (happiness < 50) {
+        // If the tamagotchi is sad, change the state of the bitmap to display a sad tamagotchi.
+        // TODO: Create a sad tamagotchi animation loop
+        std::memcpy(bitmap, food_bmp, sizeof(food_bmp));
+    }
 }
 
 void Tamagotchi::feed() {

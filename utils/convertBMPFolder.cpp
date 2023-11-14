@@ -2,6 +2,8 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <filesystem>
+#include <cstdint>
 
 std::vector<uint8_t> readBMP(const std::string& file) {
     std::ifstream bmp(file, std::ios::binary);
@@ -19,23 +21,27 @@ std::vector<uint8_t> readBMP(const std::string& file) {
             return bitmap;
         }
 
-        // Calculate padding for each row to be a multiple of 4 bytes.
         int row_padded = ((width + 31) / 32) * 4;
         uint8_t* data = new uint8_t[row_padded];
 
         bmp.seekg(61);  // Start of data
 
-        bitmap.resize(width * height);  // Pre-allocate size
+        int packedSize = width * height / 8;
+        bitmap.resize(packedSize);  // Pre-allocate size for packed bits
 
         for (int y = height - 1; y >= 0; --y) {
             bmp.read(reinterpret_cast<char*>(data), row_padded);
 
-            for (int x = 0; x < width; ++x) {
-                int byteIndex = x / 8;
-                int bitIndex = x % 8;
-                uint8_t pixel = (data[byteIndex] >> (7 - bitIndex)) & 1;
+            for (int x = 0; x < width; x += 8) {
+                uint8_t packedByte = 0;
+                for (int bit = 0; bit < 8; ++bit) {
+                    int byteIndex = (x + bit) / 8;
+                    int bitIndex = (x + bit) % 8;
+                    uint8_t pixel = (data[byteIndex] >> (7 - bitIndex)) & 1;
+                    packedByte |= (pixel << (7 - bit));
+                }
 
-                bitmap[y * width + x] = pixel;
+                bitmap[y * width / 8 + x / 8] = packedByte;
             }
         }
 
@@ -50,13 +56,12 @@ void writeArrayToFile(const std::vector<uint8_t>& bitmap, const std::string& arr
     if (out.is_open()) {
         out << "uint8_t " << arrayName << "_bmp[] = {";
         for (size_t i = 0; i < bitmap.size(); ++i) {
-            out << (int)bitmap[i];
+            out << "0x" << std::hex << (int)bitmap[i];
             if (i < bitmap.size() - 1) {
                 out << ", ";
             }
 
-            // Insert a newline after every 64 entries
-            if ((i + 1) % 64 == 0) {
+            if ((i + 1) % 8 == 0) {
                 out << "\n";
             }
         }
