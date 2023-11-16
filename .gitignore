@@ -5,3 +5,4 @@ pico-sdk/
 CMakeCache.txt
 CMakeFiles/
 **/build_raylib/raylib/
+.pio/

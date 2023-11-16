@@ -1,3 +1,3 @@
-[submodule "fetch_microchip-samd51-csp"]
-	path = fetch_microchip-samd51-csp
-	url = https://github.com/CMakePackageRegistry/fetch_microchip-samd51-csp.git
+[submodule "atsamd51"]
+	path = atsamd51
+	url = https://gitlab.cba.mit.edu/pub/hello-world/atsamd51.git
