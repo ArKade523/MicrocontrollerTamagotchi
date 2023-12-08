@@ -1,0 +1,13 @@
+#ifndef GLOBALS_H
+#define GLOBALS_H
+
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+
+// THESE COULD BE WRONG
+// TEST THEM
+#define LEFT_BUTTON 12
+#define CENTER_BUTTON 11
+#define RIGHT_BUTTON 10
+
+#endif // GLOBALS_H

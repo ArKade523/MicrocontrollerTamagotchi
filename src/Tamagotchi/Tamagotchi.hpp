@@ -5,26 +5,44 @@ class Tamagotchi {
 public:
     enum State {
         EGG,
+        BABY,
         CHILD,
+        TEEN,
         ADULT,
-        // ...
+        SPECIAL,
+        SENIOR,
+        GHOST
     };
 
-    static const int WIDTH = 64;
-    static const int HEIGHT = 128;
+    enum GameState {
+        NORMAL,
+        FEED,
+        PLAY,
+        TRAIN
+    };
+
+    static const int WIDTH = 50;
+    static const int HEIGHT = 50;
 
     Tamagotchi();
     void update();
     void feed();
     void play();
-    void clean();
+    void train();
     uint8_t* getBitmap();
+
+    virtual void noGameUpdate() = 0;
+    virtual void feedGameUpdate() = 0;
+    virtual void playGameUpdate() = 0;
+    virtual void trainGameUpdate() = 0;
 
 private:
     State state;
+    GameState gameState;
     int hunger;
     int happiness;
-    int health;
+    int training;
+    int age;
     uint8_t bitmap[WIDTH][HEIGHT] = {{1, 0, 1, 1},
                                      {0, 1, 0, 1},
                                      {1, 0, 1, 1},
