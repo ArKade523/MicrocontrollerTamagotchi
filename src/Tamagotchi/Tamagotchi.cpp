@@ -5,8 +5,11 @@
 #include <cstring>
 #include "bitmaps.hpp"
 
-Tamagotchi::Tamagotchi() : state(EGG), hunger(100), happiness(100), training(0), age(0) {
-    // Initialization code
+
+Tamagotchi::Tamagotchi() : state(EGG), hunger(100), happiness(100), training(0), age(0), gameState(NORMAL) {
+    // Display Initialization code
+
+
 }
 
 void Tamagotchi::update() {

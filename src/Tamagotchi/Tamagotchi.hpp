@@ -38,11 +38,11 @@ public:
 
 private:
     State state;
-    GameState gameState;
     int hunger;
     int happiness;
     int training;
     int age;
+    GameState gameState;
     uint8_t bitmap[WIDTH][HEIGHT] = {{1, 0, 1, 1},
                                      {0, 1, 0, 1},
                                      {1, 0, 1, 1},
