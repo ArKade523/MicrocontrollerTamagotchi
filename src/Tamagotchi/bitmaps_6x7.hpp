@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <binary.h>
 
 static const uint8_t heart_bmp[] = {
     B01101100, 
