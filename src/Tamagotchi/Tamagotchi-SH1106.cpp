@@ -21,7 +21,14 @@ Tamagotchi_SH1106::Tamagotchi_SH1106(void) : display(Adafruit_SH1106G(SCREEN_WID
     display.display();
 }
 
-void Tamagotchi_SH1106::noGameUpdate() {
+void Tamagotchi_SH1106::drawHome() {
+    display.clearDisplay();
+    display.drawBitmap(2, 2, hunger_bmp, 6, 7, SH110X_WHITE);
+    display.drawBitmap(34, 2, heart_bmp, 6, 7, SH110X_WHITE);
+    display.drawBitmap(66, 2, training_bmp, 6, 7, SH110X_WHITE);
+    display.drawBitmap(98, 2, sleeping_bmp, 6, 7, SH110X_WHITE);
+
+    display.display();
 
 }
 

@@ -31,7 +31,7 @@ public:
     void train();
     uint8_t* getBitmap();
 
-    virtual void noGameUpdate() = 0;
+    virtual void drawHome() = 0;
     virtual void feedGameUpdate() = 0;
     virtual void playGameUpdate() = 0;
     virtual void trainGameUpdate() = 0;

@@ -74,7 +74,7 @@ void Tamagotchi::update() {
     switch (gameState) {
         case NORMAL:
             // If the game state is normal, do nothing
-            noGameUpdate();
+            drawHome();
             break;
         case FEED:
             // If the game state is feed, run the feed game update

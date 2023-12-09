@@ -12,7 +12,7 @@ public:
     Tamagotchi_SH1106(void);
     uint8_t* getBitmap();
 
-    void noGameUpdate() override;
+    void drawHome() override;
     void feedGameUpdate() override;
     void playGameUpdate() override;
     void trainGameUpdate() override;
