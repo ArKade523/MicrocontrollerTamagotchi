@@ -13,6 +13,7 @@ public:
     uint8_t* getBitmap();
 
     void drawHome() override;
+    void drawMenu() override;
     void feedGameUpdate() override;
     void playGameUpdate() override;
     void trainGameUpdate() override;

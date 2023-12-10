@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <ctime>
 #include <cstring>
-#include "bitmaps.hpp"
+// #include "bitmaps.hpp"
 
 
 Tamagotchi::Tamagotchi() : state(EGG), hunger(100), happiness(100), training(0), age(0), gameState(NORMAL) {
@@ -27,7 +27,7 @@ void Tamagotchi::update() {
     if (happiness < 50) {
         // If the tamagotchi is sad, change the state of the bitmap to display a sad tamagotchi.
         // TODO: Create a sad tamagotchi animation loop
-        std::memcpy(bitmap, food_bmp, sizeof(food_bmp));
+        // std::memcpy(bitmap, food_bmp, sizeof(food_bmp));
     }
 
     if (hunger < 50) {
@@ -76,6 +76,10 @@ void Tamagotchi::update() {
             // If the game state is normal, do nothing
             drawHome();
             break;
+        case MENU:
+            // If the game state is menu, run the menu game update
+            drawMenu();
+            break;
         case FEED:
             // If the game state is feed, run the feed game update
             feedGameUpdate();
@@ -88,21 +92,28 @@ void Tamagotchi::update() {
             // If the game state is train, run the train game update
             trainGameUpdate();
             break;
+
+        default:
+            // If gameState is invalid, set it to normal
+            gameState = NORMAL;
+            drawHome();
+            break;
     }
+
 }
 
 void Tamagotchi::feed() {
-    std::memcpy(bitmap, food_bmp, sizeof(food_bmp));
+    // std::memcpy(bitmap, food_bmp, sizeof(food_bmp));
     hunger += 10;
 }
 
 void Tamagotchi::play() {
-    std::memcpy(bitmap, play_bmp, sizeof(play_bmp));
+    // std::memcpy(bitmap, play_bmp, sizeof(play_bmp));
     happiness += 10;
 }
 
 void Tamagotchi::train() {
-    std::memcpy(bitmap, train_bmp, sizeof(train_bmp));
+    // std::memcpy(bitmap, train_bmp, sizeof(train_bmp));
     // train to 
     training += 10;
 }

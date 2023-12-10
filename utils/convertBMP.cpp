@@ -14,10 +14,10 @@ std::vector<uint8_t> readBMP(const std::string& file) {
         int width = *(int*)&header[18];
         int height = *(int*)&header[22];
 
-        if (width != 128 || height != 64) {
-            std::cerr << "Invalid dimensions, must be 128x64.\n";
-            return bitmap;
-        }
+        // if (width != 128 || height != 64) {
+        //     std::cerr << "Invalid dimensions, must be 128x64.\n";
+        //     return bitmap;
+        // }
 
         int row_padded = ((width + 31) / 32) * 4;
         uint8_t* data = new uint8_t[row_padded];
