@@ -6,6 +6,7 @@
 
 
 void setup() {
+    // set button modes
     pinMode(LEFT_BUTTON, INPUT_PULLUP);
     pinMode(CENTER_BUTTON, INPUT_PULLUP);
     pinMode(RIGHT_BUTTON, INPUT_PULLUP);

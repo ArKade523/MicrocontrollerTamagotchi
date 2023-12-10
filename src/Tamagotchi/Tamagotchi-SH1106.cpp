@@ -10,17 +10,7 @@
 Tamagotchi_SH1106::Tamagotchi_SH1106(void) : display(Adafruit_SH1106G(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET)) {
     delay(250); // wait for the OLED to power up
     display.begin(i2c_Address, true); // Address 0x3C default
-
-    display.display();
-
-    delay(100);
-
-    display.clearDisplay();   // clears the screen and buffer
-
-    display.setTextSize(1);   // text size 1 = 6x8, 2 = 12x16, 3 = 18x24, etc
-    display.setTextColor(SH110X_WHITE); // default color
-    display.println("Hello, elly!");
-    display.display();
+    display.clearDisplay();
 }
 
 void Tamagotchi_SH1106::drawHome() {
@@ -57,6 +47,8 @@ void Tamagotchi_SH1106::drawMenu() {
     display.print("Select a game");
 
     GameState selectedGame = NORMAL;
+
+    delay(50);
 
     if (centerButtonPushed()) {
         gameState = selectedGame;
