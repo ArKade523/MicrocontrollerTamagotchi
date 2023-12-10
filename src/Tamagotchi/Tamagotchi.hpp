@@ -16,6 +16,7 @@ public:
 
     enum GameState {
         NORMAL,
+        MENU,
         FEED,
         PLAY,
         TRAIN
@@ -32,17 +33,19 @@ public:
     uint8_t* getBitmap();
 
     virtual void drawHome() = 0;
+    virtual void drawMenu() = 0;
     virtual void feedGameUpdate() = 0;
     virtual void playGameUpdate() = 0;
     virtual void trainGameUpdate() = 0;
 
-private:
     State state;
     int hunger;
     int happiness;
     int training;
     int age;
     GameState gameState;
+
+private:
     uint8_t bitmap[WIDTH][HEIGHT] = {{1, 0, 1, 1},
                                      {0, 1, 0, 1},
                                      {1, 0, 1, 1},
