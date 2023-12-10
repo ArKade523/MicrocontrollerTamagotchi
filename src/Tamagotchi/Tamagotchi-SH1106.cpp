@@ -72,10 +72,12 @@ void Tamagotchi_SH1106::drawMenu() {
     }
 
     if (leftButtonPushed) {
-        selectedGame = static_cast<GameState>((static_cast<int>(selectedGame) - 1) % (static_cast<int>(GameState::NUM_STATES) - 1));
+        selectedGame = static_cast<GameState>((static_cast<int>(selectedGame) + 
+            static_cast<int>(GameState::NUM_STATES) - 2) % (static_cast<int>(GameState::NUM_STATES) - 1));
         leftButtonPushed = false;
     } else if (rightButtonPushed) {
-        selectedGame = static_cast<GameState>((static_cast<int>(selectedGame) + 1) % (static_cast<int>(GameState::NUM_STATES) - 1));
+        selectedGame = static_cast<GameState>((static_cast<int>(selectedGame) + 1)
+            % (static_cast<int>(GameState::NUM_STATES) - 1));
         rightButtonPushed = false;
     }
 
@@ -100,6 +102,11 @@ void Tamagotchi_SH1106::drawMenu() {
             display.setCursor(64 - 2 * 12, 32 - 8);
             display.print("Feed");
             break;
+        case SLEEP:
+            display.setTextSize(2);
+            display.setCursor(64 - 2.5 * 12, 32 - 8);
+            display.print("Sleep");
+            break;
 
         default:
             display.setTextSize(2);
@@ -107,6 +114,9 @@ void Tamagotchi_SH1106::drawMenu() {
             display.print("??");
             break;
     }
+
+    display.fillTriangle(2, 32, 7, 27, 7, 37, SH110X_WHITE);
+    display.fillTriangle(126, 32, 121, 27, 121, 37, SH110X_WHITE);
 
     display.display();
 }

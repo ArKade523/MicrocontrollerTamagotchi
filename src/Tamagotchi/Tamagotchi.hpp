@@ -19,6 +19,7 @@ public:
         FEED,
         PLAY,
         TRAIN,
+        SLEEP,
         MENU,
         NUM_STATES
     };
