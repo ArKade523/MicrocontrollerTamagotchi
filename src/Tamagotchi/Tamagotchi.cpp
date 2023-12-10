@@ -6,7 +6,7 @@
 // #include "bitmaps.hpp"
 
 
-Tamagotchi::Tamagotchi() : state(EGG), hunger(100), happiness(100), training(0), age(0), gameState(NORMAL) {
+Tamagotchi::Tamagotchi() : state(EGG), hunger(100), happiness(100), training(0), sleepiness(100), age(0), gameState(HOME) {
     // Display Initialization code
 
 
@@ -72,7 +72,7 @@ void Tamagotchi::update() {
 
     // State machine to determine whether a game is running
     switch (gameState) {
-        case NORMAL:
+        case HOME:
             // If the game state is normal, do nothing
             drawHome();
             break;
@@ -95,7 +95,7 @@ void Tamagotchi::update() {
 
         default:
             // If gameState is invalid, set it to normal
-            gameState = NORMAL;
+            gameState = HOME;
             drawHome();
             break;
     }
