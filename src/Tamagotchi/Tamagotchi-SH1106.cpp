@@ -4,6 +4,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SH110X.h>
 #include "bitmaps_6x7.hpp"
+#include "../utility/m4_utility.hpp"
 #include "bitmaps.hpp"
 
 Tamagotchi_SH1106::Tamagotchi_SH1106(void) : display(Adafruit_SH1106G(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET)) {
@@ -41,7 +42,7 @@ void Tamagotchi_SH1106::drawHome() {
 
     display.drawBitmap(50, 15, egg_uncracked_bmp, 40, 40, SH110X_WHITE);
 
-    if (digitalRead(CENTER_BUTTON) == LOW) {
+    if (debounce(CENTER_BUTTON)) {
         gameState = MENU;
     }
 
@@ -66,7 +67,7 @@ void Tamagotchi_SH1106::drawMenu() {
 
     Game selectedGame = RETURN;
 
-    if (digitalRead(CENTER_BUTTON) == LOW) {
+    if (debounce(CENTER_BUTTON)) {
         switch(selectedGame) {
             case FEED_GAME:
                 gameState = FEED;
@@ -81,6 +82,12 @@ void Tamagotchi_SH1106::drawMenu() {
                 gameState = TRAIN;
                 break;
         }
+    }
+
+    if (debounce(LEFT_BUTTON)) {
+        selectedGame = static_cast<Game>(static_cast<int>(selectedGame) - 1);
+    } else if (debounce(RIGHT_BUTTON)) {
+        selectedGame = static_cast<Game>(static_cast<int>(selectedGame) + 1);
     }
 
     display.display();
