@@ -10,17 +10,7 @@
 Tamagotchi_SH1106::Tamagotchi_SH1106(void) : display(Adafruit_SH1106G(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET)) {
     delay(250); // wait for the OLED to power up
     display.begin(i2c_Address, true); // Address 0x3C default
-
-    display.display();
-
-    delay(100);
-
-    display.clearDisplay();   // clears the screen and buffer
-
-    display.setTextSize(1);   // text size 1 = 6x8, 2 = 12x16, 3 = 18x24, etc
-    display.setTextColor(SH110X_WHITE); // default color
-    display.println("Hello, elly!");
-    display.display();
+    display.clearDisplay();
 }
 
 void Tamagotchi_SH1106::drawHome() {
@@ -42,7 +32,7 @@ void Tamagotchi_SH1106::drawHome() {
 
     display.drawBitmap(50, 15, egg_uncracked_bmp, 40, 40, SH110X_WHITE);
 
-    if (debounce(CENTER_BUTTON)) {
+    if (centerButtonPushed()) {
         gameState = MENU;
     }
 
@@ -59,13 +49,15 @@ void Tamagotchi_SH1106::drawMenu() {
 
     GameState selectedGame = NORMAL;
 
-    if (debounce(CENTER_BUTTON)) {
+    delay(50);
+
+    if (centerButtonPushed()) {
         gameState = selectedGame;
     }
 
-    if (debounce(LEFT_BUTTON)) {
+    if (leftButtonPushed()) {
         selectedGame = static_cast<GameState>((static_cast<int>(selectedGame) - 1) % (static_cast<int>(GameState::NUM_STATES) - 1));
-    } else if (debounce(RIGHT_BUTTON)) {
+    } else if (rightButtonPushed()) {
         selectedGame = static_cast<GameState>((static_cast<int>(selectedGame) + 1) % (static_cast<int>(GameState::NUM_STATES) - 1));
     }
 
