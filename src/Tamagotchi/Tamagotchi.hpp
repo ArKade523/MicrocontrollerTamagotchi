@@ -19,7 +19,8 @@ public:
         MENU,
         FEED,
         PLAY,
-        TRAIN
+        TRAIN,
+        NUM_STATES
     };
 
     static const int WIDTH = 50;

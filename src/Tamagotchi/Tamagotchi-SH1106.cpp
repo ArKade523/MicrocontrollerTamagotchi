@@ -57,37 +57,16 @@ void Tamagotchi_SH1106::drawMenu() {
     display.setCursor(64 - 6.5 * 6, 0);
     display.print("Select a game");
 
-    // Enum for different games
-    enum Game {
-        FEED_GAME,
-        RETURN,
-        PLAY_GAME,
-        TRAIN_GAME,
-    };
-
-    Game selectedGame = RETURN;
+    GameState selectedGame = NORMAL;
 
     if (debounce(CENTER_BUTTON)) {
-        switch(selectedGame) {
-            case FEED_GAME:
-                gameState = FEED;
-                break;
-            case RETURN:
-                gameState = NORMAL;
-                break;
-            case PLAY_GAME:
-                gameState = PLAY;
-                break;
-            case TRAIN_GAME:
-                gameState = TRAIN;
-                break;
-        }
+        gameState = selectedGame;
     }
 
     if (debounce(LEFT_BUTTON)) {
-        selectedGame = static_cast<Game>(static_cast<int>(selectedGame) - 1);
+        selectedGame = static_cast<GameState>((static_cast<int>(selectedGame) - 1) % (static_cast<int>(GameState::NUM_STATES) - 1));
     } else if (debounce(RIGHT_BUTTON)) {
-        selectedGame = static_cast<Game>(static_cast<int>(selectedGame) + 1);
+        selectedGame = static_cast<GameState>((static_cast<int>(selectedGame) + 1) % (static_cast<int>(GameState::NUM_STATES) - 1));
     }
 
     display.display();

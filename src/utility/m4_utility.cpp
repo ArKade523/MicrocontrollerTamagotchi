@@ -3,6 +3,10 @@
 #include "m4_utility.hpp"
 
 bool debounce(uint32_t pin){
+    if (digitalRead(pin) == HIGH){
+        return false;
+    }
+    
     bool state;
     state = digitalRead(pin);
     delay(30);
