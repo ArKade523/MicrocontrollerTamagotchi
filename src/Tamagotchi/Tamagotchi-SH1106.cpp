@@ -45,10 +45,8 @@ void Tamagotchi_SH1106::drawHome() {
 
     display.drawBitmap(64 - 20, 18, egg_uncracked_bmp, 40, 40, SH110X_WHITE);
 
-    if (centerButtonPushed) {
+    if (centerButtonPushed()) {
         gameState = MENU;
-
-        centerButtonPushed = false;
     }
 
     display.display();
@@ -65,20 +63,16 @@ void Tamagotchi_SH1106::drawMenu() {
 
     delay(50);
 
-    if (centerButtonPushed) {
+    if (centerButtonPushed()) {
         gameState = selectedGame;
-
-        centerButtonPushed = false;
     }
 
-    if (leftButtonPushed) {
+    if (leftButtonPushed()) {
         selectedGame = static_cast<GameState>((static_cast<int>(selectedGame) + 
             static_cast<int>(GameState::NUM_STATES) - 2) % (static_cast<int>(GameState::NUM_STATES) - 1));
-        leftButtonPushed = false;
-    } else if (rightButtonPushed) {
+    } else if (rightButtonPushed()) {
         selectedGame = static_cast<GameState>((static_cast<int>(selectedGame) + 1)
             % (static_cast<int>(GameState::NUM_STATES) - 1));
-        rightButtonPushed = false;
     }
 
     switch(selectedGame) {
@@ -129,12 +123,7 @@ void Tamagotchi_SH1106::feedGameUpdate() {
 }
 
 void Tamagotchi_SH1106::sleepGameUpdate() {
-
-    // if (centerButtonPushed){
-    //     gameState = HOME;
-
-    //     centerButtonPushed = false;
-    // }
+    gameState = HOME;
 }
 
 void Tamagotchi_SH1106::trainGameUpdate() {
@@ -182,11 +171,11 @@ void Tamagotchi_SH1106::trainGameUpdate() {
     if (digitalRead(LEFT_BUTTON) == LOW) {
         paddleX -= 4;
         if (paddleX < 0) paddleX = 0;
-        leftButtonPushed = false;
+        leftButtonPushed(false);
     } else if (digitalRead(RIGHT_BUTTON) == LOW) {
         paddleX += 4;
         if (paddleX > display.width() - paddleWidth) paddleX = display.width() - paddleWidth;
-        rightButtonPushed = false;
+        rightButtonPushed(false);
     }
 
     // ball movement

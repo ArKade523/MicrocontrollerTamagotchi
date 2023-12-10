@@ -5,12 +5,11 @@
 #include "utility/button_interface.hpp"
 #include "globals.h"
 
-// Set global interrupt variables to default state
-volatile bool leftButtonPushed = false;
-volatile bool centerButtonPushed = false;
-volatile bool rightButtonPushed = false;
-
 void setup() {
+    // Set buttons to not pushed initially
+    leftButtonPushed(false);
+    centerButtonPushed(false);
+    rightButtonPushed(false);
 
     // set button modes
     pinMode(LEFT_BUTTON, INPUT_PULLUP);
