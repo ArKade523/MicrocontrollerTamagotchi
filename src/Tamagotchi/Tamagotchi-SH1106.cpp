@@ -106,20 +106,34 @@ void Tamagotchi_SH1106::drawMenu() {
 }
 
 void Tamagotchi_SH1106::playGameUpdate() {
-
+    gameState = HOME;
 }
 
 void Tamagotchi_SH1106::feedGameUpdate() {
-
+    gameState = HOME;
 }
 
 void Tamagotchi_SH1106::trainGameUpdate() {
     // Paddle properties
-    static const uint8_t paddleWidth = 5;
-    static const uint8_t paddleHeight = 1;
-    static const uint8_t paddleBitmap[5] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF}; // 5x1 bitmap
+    static const uint8_t paddleWidth = 15;
+    static const uint8_t paddleHeight = 2;
+    static const int paddleY = 63;
     static int paddleX = 60;
-    static int paddleY = 50;
+    static int lives = 3;
+    static uint8_t bricks[6][3] = {
+        1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1
+    };
+
+    if (lives <= 0) {
+        lives = 3;
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 3; j++) {
+                bricks[i][j] = 1;
+            }
+        }
+    }
 
     // Ball properties
     static int ballX = 64, ballY = 32;
@@ -138,18 +152,61 @@ void Tamagotchi_SH1106::trainGameUpdate() {
     ballY += ballSpeedY;
 
     // Collision with walls
-    if (ballX <= 0 || ballX >= display.width() - ballSize) ballSpeedX = -ballSpeedX;
-    if (ballY <= 0) ballSpeedY = -ballSpeedY;
+    if (ballX <= ballSize || ballX >= display.width() - ballSize) ballSpeedX = -ballSpeedX;
+    if (ballY <= ballSize) ballSpeedY = -ballSpeedY;
 
     // Collision with paddle
     if (ballY >= paddleY - ballSize && ballX >= paddleX && ballX <= paddleX + paddleWidth) {
         ballSpeedY = -ballSpeedY;
     }
 
+    // Collision with bottom
+    if (ballY >= display.height() - ballSize) {
+        ballX = 64;
+        ballY = 32;
+        ballSpeedX = 1;
+        ballSpeedY = 1;
+        lives--;
+    }
+
+    // collision with bricks
+    for (int i = 0; i < 6; i++) {
+        for (int j = 0; j < 3; j++) {
+            // if the brick is active
+            if (bricks[i][j] == 1) {
+                // if the ball is within the bounds of the brick
+                if (ballX >= 2 + i * 20 && ballX <= 2 + i * 20 + 16 && ballY >= 10 + j * 8 && ballY <= 10 + j * 8 + 6) {
+                    // deactivate the brick
+                    bricks[i][j] = 0;
+                    // bounce the ball
+                    ballSpeedY = -ballSpeedY;
+                }
+            }
+        }
+    }
+
+    // Handle death
+    if (lives <= 0) {
+        gameState = HOME;
+    }
+
     // Redraw
     display.clearDisplay();
-    display.drawBitmap(paddleX, paddleY, paddleBitmap, paddleWidth, paddleHeight, SH110X_WHITE);
+    display.drawRect(paddleX, paddleY, paddleWidth, paddleHeight, SH110X_WHITE);
     display.fillCircle(ballX, ballY, ballSize, SH110X_WHITE);
+    // draw lives
+    for (int i = 0; i < lives; i++) {
+        display.drawBitmap(2 + i * 8, 2, heart_bmp, 7, 6, SH110X_WHITE);
+    }
+
+    // draw bricks
+    for (int i = 0; i < 6; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (bricks[i][j] == 1) {
+                display.fillRect(2 + i * 20, 10 + j * 8, 16, 6, SH110X_WHITE);
+            }
+        }
+    }
     display.display();
     
     delay(10);
