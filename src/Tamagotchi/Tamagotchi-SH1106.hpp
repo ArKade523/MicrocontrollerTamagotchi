@@ -19,6 +19,8 @@ public:
     void trainGameUpdate() override;
     void sleepGameUpdate() override;
 
+    void rickRoll();
+    
 private:
     Adafruit_SH1106G display;
 };

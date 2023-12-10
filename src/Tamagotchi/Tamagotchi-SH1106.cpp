@@ -129,15 +129,12 @@ void Tamagotchi_SH1106::feedGameUpdate() {
 }
 
 void Tamagotchi_SH1106::sleepGameUpdate() {
-    display.clearDisplay();
-    display.drawBitmap(0,0,hello_world_img, 128, 64, SH110X_WHITE);
-    display.display();
 
-    if (centerButtonPushed){
-        gameState = HOME;
+    // if (centerButtonPushed){
+    //     gameState = HOME;
 
-        centerButtonPushed = false;
-    }
+    //     centerButtonPushed = false;
+    // }
 }
 
 void Tamagotchi_SH1106::trainGameUpdate() {
@@ -324,4 +321,24 @@ void Tamagotchi_SH1106::trainGameUpdate() {
     display.display();
     
     delay(10);
+}
+
+void Tamagotchi_SH1106::rickRoll(){
+    display.clearDisplay();
+    display.drawBitmap(0,0,rick_astley_bmp, 114, 64, SH110X_WHITE);
+    
+    display.setTextSize(1);
+    display.setCursor(5,5);
+    display.println("Never");
+    display.setCursor(5,5+8+5);
+    display.println("gonna");
+    display.setCursor(5,5+(8+5)*2);
+    display.println("give");
+    display.setCursor(5,5+(8+5)*3);
+    display.println("you");
+    display.setCursor(5,5+(8+5)*4);
+    display.println("up");
+    display.display();
+
+    while(1);
 }
