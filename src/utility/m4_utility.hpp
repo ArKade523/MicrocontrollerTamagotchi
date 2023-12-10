@@ -1,8 +1,16 @@
-#pragma once
+#ifndef M4_Utility 
+#define M4_Utility
 
 #include <stdint.h>
 
 bool debounce(uint32_t pin);
-bool leftButtonPushed();
-bool rightButtonPushed();
-bool centerButtonPushed();
+
+void rightButton_ISR();
+void leftButton_ISR();
+void centerButton_ISR();
+
+extern volatile bool leftButtonPushed;
+extern volatile bool rightButtonPushed;
+extern volatile bool centerButtonPushed;
+
+#endif
