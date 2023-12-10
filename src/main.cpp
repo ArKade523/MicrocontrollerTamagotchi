@@ -28,7 +28,7 @@ void setup() {
     // display.display();
     
     while(1) {
-        tamagotchi.trainGameUpdate();
+        tamagotchi.update();
         // if (digitalRead(LEFT_BUTTON) == LOW) {
         //     display.clearDisplay();
         //     display.setCursor(0, 0);
