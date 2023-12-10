@@ -17,28 +17,19 @@ bool debounce(uint32_t pin){
 
 bool leftButtonPushed(){
     if (digitalRead(LEFT_BUTTON) == LOW){
-        if (debounce(LEFT_BUTTON)){
-            return true;
-        }
+        return debounce(LEFT_BUTTON);
     }
-    return false;
 }
 
 bool rightButtonPushed(){
     if (digitalRead(RIGHT_BUTTON) == LOW){
-        if (debounce(RIGHT_BUTTON)){
-            return true;
-        }
+        return debounce(RIGHT_BUTTON);
     }
-    return false;
 }
 
 
 bool centerButtonPushed(){
     if (digitalRead(CENTER_BUTTON) == LOW){
-        if (debounce(CENTER_BUTTON)){
-            return true;
-        }
+        return debounce(CENTER_BUTTON);
     }
-    return false;
 }

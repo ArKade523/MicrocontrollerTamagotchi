@@ -42,12 +42,11 @@ void Tamagotchi_SH1106::drawHome() {
 
     display.drawBitmap(50, 15, egg_uncracked_bmp, 40, 40, SH110X_WHITE);
 
-    if (debounce(CENTER_BUTTON)) {
+    if (centerButtonPushed()) {
         gameState = MENU;
     }
 
     display.display();
-
 }
 
 void Tamagotchi_SH1106::drawMenu() {
@@ -59,13 +58,13 @@ void Tamagotchi_SH1106::drawMenu() {
 
     GameState selectedGame = NORMAL;
 
-    if (debounce(CENTER_BUTTON)) {
+    if (centerButtonPushed()) {
         gameState = selectedGame;
     }
 
-    if (debounce(LEFT_BUTTON)) {
+    if (leftButtonPushed()) {
         selectedGame = static_cast<GameState>((static_cast<int>(selectedGame) - 1) % (static_cast<int>(GameState::NUM_STATES) - 1));
-    } else if (debounce(RIGHT_BUTTON)) {
+    } else if (rightButtonPushed()) {
         selectedGame = static_cast<GameState>((static_cast<int>(selectedGame) + 1) % (static_cast<int>(GameState::NUM_STATES) - 1));
     }
 
@@ -94,9 +93,9 @@ void Tamagotchi_SH1106::trainGameUpdate() {
     static int ballSize = 2;
 
     // Handle paddle movement
-    if (digitalRead(LEFT_BUTTON) == LOW) {
+    if (leftButtonPushed()) {
         paddleX -= 2;
-    } else if (digitalRead(RIGHT_BUTTON) == LOW) {
+    } else if (rightButtonPushed()) {
         paddleX += 2;
     }
 
