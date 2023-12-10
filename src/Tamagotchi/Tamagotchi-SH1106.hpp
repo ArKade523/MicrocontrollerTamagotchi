@@ -17,6 +17,7 @@ public:
     void feedGameUpdate() override;
     void playGameUpdate() override;
     void trainGameUpdate() override;
+    void sleepGameUpdate() override;
 
 private:
     Adafruit_SH1106G display;

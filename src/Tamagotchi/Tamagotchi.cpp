@@ -92,6 +92,9 @@ void Tamagotchi::update() {
             // If the game state is train, run the train game update
             trainGameUpdate();
             break;
+        case SLEEP:
+            sleepGameUpdate();
+            break;
 
         default:
             // If gameState is invalid, set it to normal

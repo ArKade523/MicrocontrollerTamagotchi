@@ -1,12 +1,12 @@
 #include <Arduino.h>
 #include <stdint.h>
 #include "globals.h"
-#include "m4_utility.hpp"
+#include "button_interface.hpp"
 
 bool debounce(uint32_t pin){
     bool state;
     state = digitalRead(pin);
-    delay(50);
+    delay(100);
     if (state == digitalRead(pin)){
         return true;   
     }

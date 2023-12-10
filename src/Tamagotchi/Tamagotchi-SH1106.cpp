@@ -4,7 +4,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SH110X.h>
 #include "bitmaps_6x7.hpp"
-#include "../utility/m4_utility.hpp"
+#include "../utility/button_interface.hpp"
 #include "bitmaps.hpp"
 
 Tamagotchi_SH1106::Tamagotchi_SH1106(void) : display(Adafruit_SH1106G(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET)) {
@@ -71,7 +71,8 @@ void Tamagotchi_SH1106::drawMenu() {
     }
 
     if (leftButtonPushed) {
-        selectedGame = static_cast<GameState>((static_cast<int>(selectedGame) - 1) % (static_cast<int>(GameState::NUM_STATES) - 1));
+        selectedGame = static_cast<GameState>((static_cast<int>(selectedGame) + 
+            (static_cast<int>(GameState::NUM_STATES) - 2)) % (static_cast<int>(GameState::NUM_STATES) - 1));
         leftButtonPushed = false;
     } else if (rightButtonPushed) {
         selectedGame = static_cast<GameState>((static_cast<int>(selectedGame) + 1) % (static_cast<int>(GameState::NUM_STATES) - 1));
@@ -99,7 +100,11 @@ void Tamagotchi_SH1106::drawMenu() {
             display.setCursor(64 - 2 * 12, 32 - 8);
             display.print("Feed");
             break;
-
+        case SLEEP:
+            display.setTextSize(2);
+            display.setCursor(64 - 2.5 * 12, 32 - 8);
+            display.print("Sleep");
+            break;
         default:
             display.setTextSize(2);
             display.setCursor(64 - 1 * 12, 32 - 8);
@@ -116,6 +121,18 @@ void Tamagotchi_SH1106::playGameUpdate() {
 
 void Tamagotchi_SH1106::feedGameUpdate() {
     gameState = HOME;
+}
+
+void Tamagotchi_SH1106::sleepGameUpdate() {
+    display.clearDisplay();
+    display.drawBitmap(0,0,hello_world_img, 128, 64, SH110X_WHITE);
+    display.display();
+
+    if (centerButtonPushed){
+        gameState = HOME;
+
+        centerButtonPushed = false;
+    }
 }
 
 void Tamagotchi_SH1106::trainGameUpdate() {

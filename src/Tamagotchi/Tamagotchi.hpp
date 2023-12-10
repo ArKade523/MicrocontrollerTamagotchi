@@ -19,6 +19,7 @@ public:
         FEED,
         PLAY,
         TRAIN,
+        SLEEP,
         MENU,
         NUM_STATES
     };
@@ -38,6 +39,7 @@ public:
     virtual void feedGameUpdate() = 0;
     virtual void playGameUpdate() = 0;
     virtual void trainGameUpdate() = 0;
+    virtual void sleepGameUpdate() = 0;
 
     State state;
     int hunger;

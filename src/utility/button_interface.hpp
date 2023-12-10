@@ -1,5 +1,5 @@
-#ifndef M4_Utility 
-#define M4_Utility
+#ifndef button_interface 
+#define button_interface
 
 #include <stdint.h>
 

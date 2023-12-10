@@ -2,7 +2,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SH110X.h>
 #include "Tamagotchi/Tamagotchi-SH1106.hpp"
-#include "utility/m4_utility.hpp"
+#include "utility/button_interface.hpp"
 #include "globals.h"
 
 // Set global interrupt variables to default state
