@@ -8,6 +8,7 @@ bool debounce(uint32_t pin){
     state = digitalRead(pin);
     delay(50);
     if (state == digitalRead(pin)){
+        while (digitalRead(pin) == state);
         return true;   
     }
     else{
@@ -15,29 +16,14 @@ bool debounce(uint32_t pin){
     }
 }
 
-bool leftButtonPushed(){
-    if (digitalRead(LEFT_BUTTON) == LOW){
-        if (debounce(LEFT_BUTTON)){
-            return true;
-        }
-    }
-    return false;
+void rightButton_ISR(){
+    if (debounce(RIGHT_BUTTON)) rightButtonPushed = true;
 }
 
-bool rightButtonPushed(){
-    if (digitalRead(RIGHT_BUTTON) == LOW){
-        if (debounce(RIGHT_BUTTON)){
-            return true;
-        }
-    }
-    return false;
+void leftButton_ISR(){
+    if (debounce(LEFT_BUTTON)) leftButtonPushed = true;
 }
 
-bool centerButtonPushed(){
-    if (digitalRead(CENTER_BUTTON) == LOW){
-        if (debounce(CENTER_BUTTON)){
-            return true;
-        }
-    }
-    return false;
+void centerButton_ISR(){
+    if (debounce(CENTER_BUTTON)) centerButtonPushed = true;
 }
