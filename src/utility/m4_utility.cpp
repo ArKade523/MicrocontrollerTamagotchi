@@ -6,7 +6,7 @@
 bool debounce(uint32_t pin){
     bool state;
     state = digitalRead(pin);
-    delay(50);
+    delay(30);
     if (state == digitalRead(pin)){
         return true;   
     }
