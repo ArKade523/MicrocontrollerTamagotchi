@@ -15,11 +15,11 @@ public:
     };
 
     enum GameState {
-        NORMAL,
-        MENU,
+        HOME,
         FEED,
         PLAY,
         TRAIN,
+        MENU,
         NUM_STATES
     };
 
@@ -43,6 +43,7 @@ public:
     int hunger;
     int happiness;
     int training;
+    int sleepiness;
     int age;
     GameState gameState;
 
