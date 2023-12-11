@@ -25,29 +25,31 @@ void Tamagotchi_SH1106::drawHome() {
     display.drawBitmap(2, 2, hunger_bmp, 7, 6, SH110X_WHITE);
     display.drawLine(11, 3, 31, 3, SH110X_WHITE);
     display.drawLine(11, 6, 31, 6, SH110X_WHITE);
-    display.drawRect(11, 4, hunger / 5, 2, SH110X_WHITE);
+    if (hunger > 0) display.drawRect(11, 4, hunger / 5, 2, SH110X_WHITE);
 
     // Happiness stat
     display.drawBitmap(34, 2, heart_bmp, 7, 6, SH110X_WHITE);
     display.drawLine(43, 3, 63, 3, SH110X_WHITE);
     display.drawLine(43, 6, 63, 6, SH110X_WHITE);
-    display.drawRect(43, 4, happiness / 5, 2, SH110X_WHITE);
+    if (happiness > 0) display.drawRect(43, 4, happiness / 5, 2, SH110X_WHITE);
 
     // Training stat
     display.drawBitmap(66, 2, training_bmp, 7, 6, SH110X_WHITE);
     display.drawLine(75, 3, 95, 3, SH110X_WHITE);
     display.drawLine(75, 6, 95, 6, SH110X_WHITE);
-    display.drawRect(75, 4, training / 5, 2, SH110X_WHITE);
+    if (training > 0) display.drawRect(75, 4, (training*20)/training_needed.at(state), 2, SH110X_WHITE);      // Fill the training bar proportionally to how much training is done
 
     // Sleepiness stat
     display.drawBitmap(98, 2, sleeping_bmp, 7, 6, SH110X_WHITE);
     display.drawLine(107, 3, 127, 3, SH110X_WHITE);
     display.drawLine(107, 6, 127, 6, SH110X_WHITE);
-    display.drawRect(107, 4, sleepiness / 5, 2, SH110X_WHITE);
+    if (sleepiness > 0) display.drawRect(107, 4, sleepiness / 5, 2, SH110X_WHITE);
 
+    // Stats bottom line
     display.drawLine(0, 10, 128, 10, SH110X_WHITE);
 
-    display.drawBitmap(64 - 20, 18, egg_uncracked_bmp, 40, 40, SH110X_WHITE);
+    // Draw tamagotchi
+    display.drawBitmap(64 - 20, 18, state_bitmap.at(state), 40, 40, SH110X_WHITE);
 
     if (centerButtonPushed()) {
         gameState = MENU;
@@ -85,11 +87,11 @@ void Tamagotchi_SH1106::drawMenu() {
             display.setCursor(64 - 2 * 12, 32 - 8);
             display.print("Home");
             break;
-        case PLAY:
-            display.setTextSize(2);
-            display.setCursor(64 - 2 * 12, 32 - 8);
-            display.print("Play");
-            break;
+        // case PLAY:
+        //     display.setTextSize(2);
+        //     display.setCursor(64 - 2 * 12, 32 - 8);
+        //     display.print("Play");
+        //     break;
         case TRAIN:
             display.setTextSize(2);
             display.setCursor(64 - 2.5 * 12, 32 - 8);
@@ -119,15 +121,22 @@ void Tamagotchi_SH1106::drawMenu() {
 }
 
 void Tamagotchi_SH1106::playGameUpdate() {
+    tire();
+    happiness+=2;
     gameState = HOME;
 }
 
 void Tamagotchi_SH1106::feedGameUpdate() {
+<<<<<<< HEAD
     Snake snakeGame {display};              // Initialize the game by providing the display information
     int score = snakeGame.play();           // Will return score once the game ends
 
     // Update hunger stat
     hunger += score / 2;
+=======
+    tire();
+    hunger+=5;
+>>>>>>> origin/HUnter
     gameState = HOME;
 }
 
@@ -139,17 +148,39 @@ void Tamagotchi_SH1106::sleepGameUpdate() {
 }
 
 void Tamagotchi_SH1106::trainGameUpdate() {
-    BrickBreaker brickGame {display};       // Initialize the game by providing the display information
-    int score = brickGame.play();           // Will return score once the game ends
+    training += 5;
 
-    // Update training stat
-    if (score < 18) {
-        training += score / 6;
-    } else {
-        training += 5;
-    }
-    
+    tire();
     gameState = HOME;
+    // BrickBreaker brickGame {display};       // Initialize the game by providing the display information
+    // int score = brickGame.play();           // Will return score once the game ends
+
+    // // Update training stat
+    // if (score < 18) {
+    //     training += score / 6;
+    // } else {
+    //     training += 5;
+    // }
+    
+    // gameState = HOME;
+}
+
+void Tamagotchi_SH1106::die(){
+    display.clearDisplay();
+
+    display.setTextSize(1);
+    display.setCursor(64 - (9/2)*6, 0);
+    display.println("GAME OVER");
+
+    display.drawLine(0, 10, 128, 10, SH110X_WHITE);
+
+    // Draw dead tamagotchi
+    display.drawBitmap(64 - 15, 18, dead_bmp, 40, 40, SH110X_WHITE);
+
+    display.display();
+
+    // Dead loop
+    while(1);
 }
 
 void Tamagotchi_SH1106::rickRoll(){
