@@ -6,6 +6,8 @@
 #include <Adafruit_SH110X.h>
 #include "../globals.h"
 
+#include "../Games/sheep_jump.hpp"
+
 class Tamagotchi_SH1106 : public Tamagotchi {
 
 public:
@@ -20,7 +22,7 @@ public:
     void sleepGameUpdate() override;
 
     void rickRoll();
-    
+
 private:
     Adafruit_SH1106G display;
 };

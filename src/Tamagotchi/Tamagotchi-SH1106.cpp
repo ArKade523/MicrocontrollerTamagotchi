@@ -8,6 +8,8 @@
 #include "bitmaps.hpp"
 #include <algorithm>
 
+#include "../Games/sheep_jump.hpp"
+
 Tamagotchi_SH1106::Tamagotchi_SH1106(void) : display(Adafruit_SH1106G(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET)) {
     delay(250); // wait for the OLED to power up
     display.begin(i2c_Address, true); // Address 0x3C default
@@ -123,6 +125,9 @@ void Tamagotchi_SH1106::feedGameUpdate() {
 }
 
 void Tamagotchi_SH1106::sleepGameUpdate() {
+    sheepJump sheepGame {display};          // Initialize the game by providing the display information
+    sheepGame.play();                       // Will return once the game ends
+
     gameState = HOME;
 }
 
