@@ -2,9 +2,9 @@
 #include <algorithm>
 
 BrickBreaker::BrickBreaker(Adafruit_SH1106G& disp) : display(disp), 
-    paddleWidth(20), paddleHeight(5), paddleY(5), paddleX(64), 
-    lives(3), ballX(64), ballY(20), ballSpeedX(0), ballSpeedY(0), 
-    ballSize(2), constantBallSpeed(2), score(0) 
+    paddleWidth(20), paddleHeight(5), paddleY(63), paddleX(64), 
+    lives(3), score(0), ballX(64), ballY(20), ballSpeedX(1), ballSpeedY(1), 
+    ballSize(2), constantBallSpeed(2)
 {
     // Initialize bricks
     for (int i = 0; i < 6; i++) {
@@ -18,11 +18,9 @@ void BrickBreaker::handlePaddleMovement() {
     if (digitalRead(LEFT_BUTTON) == LOW) {
         paddleX -= 4;
         if (paddleX < 0) paddleX = 0;
-        leftButtonPushed(false);
     } else if (digitalRead(RIGHT_BUTTON) == LOW) {
         paddleX += 4;
         if (paddleX > display.width() - paddleWidth) paddleX = display.width() - paddleWidth;
-        rightButtonPushed(false);
     }
 }
 
@@ -171,9 +169,6 @@ void BrickBreaker::drawGame() {
 }
 
 int BrickBreaker::play() {
-    // Initialize ball speed
-    ballSpeedX = 1;
-    ballSpeedY = 1;
 
     while (1) {
         handlePaddleMovement();
@@ -193,7 +188,7 @@ int BrickBreaker::play() {
                 }
             }
         }
-        
+
         if (!bricksLeft) {
             return score;
         }
