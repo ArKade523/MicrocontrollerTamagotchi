@@ -127,7 +127,7 @@ void Tamagotchi_SH1106::feedGameUpdate() {
 
 void Tamagotchi_SH1106::sleepGameUpdate() {
     sheepJump sheepGame {display};          // Initialize the game by providing the display information
-    sheepGame.play();                       // Will return once the game ends
+    sleepiness += sheepGame.play();         // Will return increase in sleep score once the game ends
 
     gameState = HOME;
 }

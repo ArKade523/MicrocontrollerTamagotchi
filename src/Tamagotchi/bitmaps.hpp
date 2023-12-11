@@ -11,5 +11,7 @@ extern const uint8_t hello_world_img[];
 
 extern const uint8_t rick_astley_bmp[];
 
+extern const uint8_t sheep[2][72];
+
 
 #endif // BITMAPS_HPP
