@@ -127,16 +127,12 @@ void Tamagotchi_SH1106::playGameUpdate() {
 }
 
 void Tamagotchi_SH1106::feedGameUpdate() {
-<<<<<<< HEAD
     Snake snakeGame {display};              // Initialize the game by providing the display information
     int score = snakeGame.play();           // Will return score once the game ends
 
     // Update hunger stat
     hunger += score / 2;
-=======
     tire();
-    hunger+=5;
->>>>>>> origin/HUnter
     gameState = HOME;
 }
 
