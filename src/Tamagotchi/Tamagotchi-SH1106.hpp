@@ -21,6 +21,8 @@ public:
     void trainGameUpdate() override;
     void sleepGameUpdate() override;
 
+    void die() override;
+
     void rickRoll();
 
 private:

@@ -69,59 +69,7 @@ bool sheepJump::sheepOutOfBounds(){
 typedef struct{
     int lowerBound, higherBound;
 }range;
-
-/*!
-    @brief  Detects if the sheep sprite is within a given rectangular range
-    @param  x   x coordinate of the bottom left corner of the rectangular region
-    @param  y   y coordinate of the bottom left corner of the rectangular region
-    @param  w   width of the rectangular region
-    @param  h   height of the rectangular region
-*/
-bool sheepJump::sheepInRange(int x, int y, int w, int h){
-    range smallerX, largerX, smallerY, largerY;
-
-    if (SHEEP_WIDTH >= w){
-        smallerX.lowerBound = x;
-        smallerX.higherBound = x + w;
-
-        largerX.lowerBound = x_position;
-        largerX.higherBound = x_position + SHEEP_WIDTH;
-    }
-    else{
-        smallerX.lowerBound = x_position;
-        smallerX.higherBound = x_position + SHEEP_WIDTH;
-
-        largerX.lowerBound = x;
-        largerX.higherBound = x + w;
-    }
-
-    if (SHEEP_HEIGHT >= h){
-        smallerY.lowerBound = x;
-        smallerY.higherBound = x + h;
-
-        largerY.lowerBound = y_position;
-        largerY.higherBound = y_position + SHEEP_HEIGHT;
-    }
-    else{
-        smallerY.lowerBound = y_position;
-        smallerY.higherBound = y_position + SHEEP_HEIGHT;
-
-        largerY.lowerBound = x;
-        largerY.higherBound = x + h;
-    }
-
-    if (((smallerX.lowerBound >= largerX.lowerBound && smallerX.lowerBound <= largerX.higherBound) || 
-         (smallerX.higherBound >= largerX.lowerBound && smallerX.higherBound <= largerX.higherBound)) &&
-        ((smallerY.lowerBound >= largerY.lowerBound && smallerY.lowerBound <= largerY.higherBound) || 
-         (smallerY.higherBound >= largerY.lowerBound && smallerY.higherBound <= largerY.higherBound)))
-    {
-        return true;
-    }
-    else{
-        return false;
-    }
-}
-// A specialized version of the sheepInRange function, specifically for the fence.
+// Checks if the sheep collided with the fence
 bool sheepJump::sheepInFence(){
     range sheep_x{.lowerBound = x_position, .higherBound = x_position+SHEEP_WIDTH},
           sheep_y{.lowerBound = y_position, .higherBound = y_position+SHEEP_HEIGHT},
