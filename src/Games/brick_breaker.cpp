@@ -183,6 +183,21 @@ int BrickBreaker::play() {
         handleWin();
         drawGame();
 
+        // check if there are any bricks left
+        bool bricksLeft = false;
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (bricks[i][j] == 1) {
+                    bricksLeft = true;
+                    break;
+                }
+            }
+        }
+        
+        if (!bricksLeft) {
+            return score;
+        }
+
         if (lives <= 0) {
             return score;
         }
