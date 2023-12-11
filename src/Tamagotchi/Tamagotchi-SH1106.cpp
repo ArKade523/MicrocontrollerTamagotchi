@@ -10,6 +10,7 @@
 
 #include "../Games/sheep_jump.hpp"
 #include "../Games/brick_breaker.hpp"
+#include "../Games/snake.hpp"
 
 Tamagotchi_SH1106::Tamagotchi_SH1106(void) : display(Adafruit_SH1106G(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET)) {
     delay(250); // wait for the OLED to power up
@@ -122,6 +123,11 @@ void Tamagotchi_SH1106::playGameUpdate() {
 }
 
 void Tamagotchi_SH1106::feedGameUpdate() {
+    Snake snakeGame {display};              // Initialize the game by providing the display information
+    int score = snakeGame.play();           // Will return score once the game ends
+
+    // Update hunger stat
+    hunger += score / 2;
     gameState = HOME;
 }
 
