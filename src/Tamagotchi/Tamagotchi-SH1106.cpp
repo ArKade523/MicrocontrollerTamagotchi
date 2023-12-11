@@ -144,21 +144,18 @@ void Tamagotchi_SH1106::sleepGameUpdate() {
 }
 
 void Tamagotchi_SH1106::trainGameUpdate() {
-    training += 5;
+    BrickBreaker brickGame {display};       // Initialize the game by providing the display information
+    int score = brickGame.play();           // Will return score once the game ends
 
+    // Update training stat
+    if (score < 18) {
+        training += score / 6;
+    } else {
+        training += 5;
+    }
+    
     tire();
     gameState = HOME;
-    // BrickBreaker brickGame {display};       // Initialize the game by providing the display information
-    // int score = brickGame.play();           // Will return score once the game ends
-
-    // // Update training stat
-    // if (score < 18) {
-    //     training += score / 6;
-    // } else {
-    //     training += 5;
-    // }
-    
-    // gameState = HOME;
 }
 
 void Tamagotchi_SH1106::die(){
