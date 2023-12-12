@@ -52,10 +52,10 @@ static const uint8_t snake_head_vertical_up_bmp[] = {
 static const uint8_t snake_head_vertical_down_bmp[] = {
     B01111000,
     B01111000,
-    B01111000,
     B11111100,
     B11111100,
     B10110100,
+    B01111000,
     B00110000,
 };
 

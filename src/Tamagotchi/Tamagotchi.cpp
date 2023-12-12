@@ -142,9 +142,3 @@ void Tamagotchi::tire() {
 void Tamagotchi::die(){
     // Death behavior
 }
-
-uint8_t* Tamagotchi::getBitmap() {
-    // Return the bitmap
-    return &bitmap[0][0];
-}
-

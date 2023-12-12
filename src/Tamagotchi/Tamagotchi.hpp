@@ -55,7 +55,6 @@ public:
     void train();
     void tire();
     virtual void die() = 0;
-    uint8_t* getBitmap();
 
     virtual void drawHome() = 0;
     virtual void drawMenu() = 0;
