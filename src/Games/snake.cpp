@@ -89,6 +89,23 @@ void Snake::drawGame() {
     // Draw food
     display.drawBitmap(foodX, foodY, hunger_bmp, 7, 6, SH110X_WHITE);
 
+    // Draw head
+    switch (snakeDirection) {
+        case UP:
+            display.drawBitmap(tail.front().x - 1, tail.front().y, snake_head_vertical_up_bmp, 6, 7, SH110X_WHITE);
+            break;
+        case LEFT:
+            display.drawBitmap(tail.front().x, tail.front().y, snake_head_horizontal_left_bmp, 7, 6, SH110X_WHITE);
+            break;
+        case DOWN:
+            display.drawBitmap(tail.front().x - 1, tail.front().y + 7, snake_head_vertical_down_bmp, 6, 7, SH110X_WHITE);
+            break;
+        case RIGHT:
+            display.drawBitmap(tail.front().x, tail.front().y, snake_head_horizontal_right_bmp, 7, 6, SH110X_WHITE);
+            break;
+    }
+
+    // Draw snake
     for (const auto& segment : tail) {
         display.fillRect(segment.x, segment.y, 4, 4, SH110X_WHITE);
     }
