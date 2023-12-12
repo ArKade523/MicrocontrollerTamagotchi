@@ -13,4 +13,4 @@ Graphics are handled via the [Adafruit_SH110X](https://github.com/adafruit/Adafr
 
 We are using [PlatformIO](https://platformio.org) for our build system. The repository contains a platformio.ini file that contains a reference to our microcontroller. If you choose to use a different one, make sure to update your PlatformIO project settings.
 
-This is a joing project by Kade Angell and Hunter Nelson
+This is a joint project by Kade Angell and Hunter Nelson
