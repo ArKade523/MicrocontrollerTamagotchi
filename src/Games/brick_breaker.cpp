@@ -44,7 +44,7 @@ void BrickBreaker::handleBallCollision() {
         }
 
         // Calculate new ballSpeedY maintaining the same overall speed
-        ballSpeedY = -sqrt(pow(constantBallSpeed, 2) - pow(ballSpeedX, 2));
+        ballSpeedY = -sqrt(pow(constantBallSpeed, 2) - pow(ballSpeedX, 2)) - .25; // < minimum y-velocity
     }
 
     // Collision with bottom
@@ -149,7 +149,7 @@ void BrickBreaker::drawGame() {
 
     // draw lives
     for (int i = 0; i < lives; i++) {
-        display.drawBitmap(2 + i * 8, 2, heart_bmp, 7, 6, SH110X_WHITE);
+        display.drawBitmap(6 + i * 8, 2, heart_bmp, 7, 6, SH110X_WHITE);
     }
 
     // draw score
