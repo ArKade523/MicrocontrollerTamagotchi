@@ -19,7 +19,6 @@ public:
     enum GameState {
         HOME,
         FEED,
-        // PLAY,
         TRAIN,
         SLEEP,
         MENU,
