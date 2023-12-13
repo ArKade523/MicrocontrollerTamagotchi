@@ -132,8 +132,8 @@ void Tamagotchi_SH1106::feedGameUpdate() {
 
     // Update hunger stat
     hunger += score / 2;
+    
     // Increase sleepiness
-
     tire();
     gameState = HOME;
 }
@@ -146,7 +146,6 @@ void Tamagotchi_SH1106::sleepGameUpdate() {
 }
 
 void Tamagotchi_SH1106::trainGameUpdate() {
-
     BrickBreaker brickGame {display};       // Initialize the game by providing the display information
     int score = brickGame.play();           // Will return score once the game ends
 
@@ -156,7 +155,7 @@ void Tamagotchi_SH1106::trainGameUpdate() {
     } else {
         training += 5;
     }
-
+    
     tire();
     gameState = HOME;
 }

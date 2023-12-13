@@ -54,7 +54,6 @@ public:
     void train();
     void tire();
     virtual void die() = 0;
-    uint8_t* getBitmap();
 
     virtual void drawHome() = 0;
     virtual void drawMenu() = 0;
@@ -71,10 +70,4 @@ public:
     // int age;
     GameState gameState;
 
-private:
-    uint8_t bitmap[WIDTH][HEIGHT] = {{1, 0, 1, 1},
-                                     {0, 1, 0, 1},
-                                     {1, 0, 1, 1},
-                                     {0, 1, 0, 1}};
-    uint8_t* bitmapPtr = &bitmap[0][0];
 };

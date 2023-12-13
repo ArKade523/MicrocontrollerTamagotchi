@@ -39,3 +39,40 @@ static const uint8_t sleeping_bmp[] = {
     B11100000
 };
 
+static const uint8_t snake_head_vertical_up_bmp[] = {
+    B00110000,
+    B01111000,
+    B10110100,
+    B11111100,
+    B11111100,
+    B01111000,
+    B01111000,
+};
+
+static const uint8_t snake_head_vertical_down_bmp[] = {
+    B01111000,
+    B01111000,
+    B11111100,
+    B11111100,
+    B10110100,
+    B01111000,
+    B00110000,
+};
+
+static const uint8_t snake_head_horizontal_right_bmp[] = {
+    B00111000,
+    B11110100,
+    B11111110,
+    B11111110,
+    B11110100,
+    B00111000
+};
+
+static const uint8_t snake_head_horizontal_left_bmp[] = {
+    B00111000,
+    B01011110,
+    B11111110,
+    B11111110,
+    B01011110,
+    B00111000
+};

@@ -78,6 +78,8 @@ void Tamagotchi::update() {
         if (state != ADULT) state = static_cast<State>(static_cast<int>(state) + 1);
     }
 
+    if (hunger > 100) hunger = 100;
+
     // If tamagotchi happiness drops to zero then the tamagotchi dies (TODO: probably should change this stat to something other than happiness)
     if (happiness <= 0){
         die();
@@ -142,9 +144,3 @@ void Tamagotchi::tire() {
 void Tamagotchi::die(){
     // Death behavior
 }
-
-uint8_t* Tamagotchi::getBitmap() {
-    // Return the bitmap
-    return &bitmap[0][0];
-}
-
